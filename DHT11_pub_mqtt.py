@@ -10,7 +10,7 @@ sensor = DHT11(Pin(15, Pin.IN, Pin.PULL_UP))
 
 station = network.WLAN(network.STA_IF)
 station.active(True)
-station.connect("SFR_F688","a9leffeadiceracychlo")
+station.connect("ssid","passwd")
 while station.isconnected() == False:
   pass
 print('Connection successful')

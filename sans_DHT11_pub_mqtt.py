@@ -10,7 +10,7 @@ sensor = DHT11(Pin(15, Pin.IN, Pin.PULL_UP))
 
 station = network.WLAN(network.STA_IF)
 station.active(True)
-station.connect("SFR_F688","a9leffeadiceracychlo")
+station.connect("ssid","passwd")
 while station.isconnected() == False:
   pass
 print('Connection successful')
@@ -22,7 +22,7 @@ sleep(0.1)
 led.value(0)
 sleep(1)
 
-#SERVER = '192.168.1.61' #MQTT Server address
+
 SERVER = "test.mosquitto.org"
 CLIENT_ID = 'ESP32_DHT22_Sensor'
 TOPIC = b'temp_humidity'
@@ -37,7 +37,7 @@ led.value(0)
 sleep(1)
 
 while True:
-    try:
+    try:    # si il y a DHT11
         sensor.measure()
         t = sensor.temperature()
         h = sensor.humidity()
@@ -52,8 +52,10 @@ while True:
             sleep(0.1)
             led.value(0)
             print(msg)
-        else:
-            print('Invalid sensor readings.')
-    except OSError:
-        print('Failed to read sensor.')
+        else:                # si il n'y a pas de DHT11
+            msg = 'Invalid sensor readings.'
+            client.publish(TOPIC, msg)
+    except OSError:         # ou erreur de lecture
+        msg = 'Failed to read sensor.'
+        client.publish(TOPIC, msg)
     sleep(5)
