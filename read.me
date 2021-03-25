@@ -1,0 +1,22 @@
+MQTT Sonde DHT11
+
+	- topic : temp_hum sur serveur myqtthub.com
+
+1) sonde pub temperature : ESP32
+	- répertore script python :  /home/pi/Documents/pyboard/main.py
+	- device sur MyQttHub - id : ESP8266_sensor / pwd : sensor01 / user name : sensor
+
+Edition :
+	- soit par terminal esptools 
+	- soit par thonny avec interpreteur MPYTHON sur port usb et accès répertoire pyboard ESP32
+
+
+2) récepteur sub et affichage oled : carte MEGA + LAN + oled 
+	- répertoire script arduino : /home/pi/Arduino/mqtt_oled_myqtthub_sub
+	- serveur broker utilisé : myqtthub avec id, user, password
+
+
+3) broker MyQttHub :
+	- https://node02.myqtthub.com/devices (hub-jeandavid54)
+	- login : aol / pwd : pythonMQTThub963 / user name : jeandavid54
+	
